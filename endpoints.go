@@ -5,10 +5,9 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/gin-gonic/gin"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/datastore"
-
-	"github.com/gin-gonic/gin"
 )
 
 type PostScoreQuery struct {
@@ -29,8 +28,8 @@ type Player struct {
 }
 
 type PlayerResult struct {
-	Name  string
-	Score string
+	Name  string `json:"name"`
+	Score string `json:"score"`
 }
 
 func postScoreEndpoint(c *gin.Context) {
