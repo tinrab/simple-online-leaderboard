@@ -91,6 +91,12 @@ func getScoresEndpoint(c *gin.Context) {
 		Take: 100,
 	}
 	c.ShouldBindQuery(&query)
+	if query.Skip < 0 {
+		query.Skip = 0
+	}
+	if query.Take > 100 {
+		query.Take = 100
+	}
 
 	if players, err := readLeaderboard(ctx, query.Skip, query.Take); err != nil {
 		errorResponse(c, http.StatusInternalServerError, "Could not read scores")
